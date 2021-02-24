@@ -1,0 +1,17 @@
+{
+  "name": "foxbook",
+  "version": "1.0.0",
+  "description": "## Models - User (email, password, username) - Story (UserId, title, content) - Comment (StatusId, UserId, content)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ricky Hemawan",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "sequelize": "^6.5.0"
+  }
+}
