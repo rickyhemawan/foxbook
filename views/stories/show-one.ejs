@@ -1,0 +1,34 @@
+<%- include('../partials/header', { username }) %>
+<!-- STORY -->
+<div class="container">
+  <div class="card my-2">
+    <div class="card-header px-4 ">
+      <h4>Story</h4>
+    </div>
+    <div class="card-body p-4 text-justify">
+      <h6 class="card-subtitle my-2 text-muted">
+        Created by: <b><%= story.User.username %></b>
+      </h6>
+      <h5 class="card-title"><%= story.title %></h5>
+      <p class="card-text"><%= story.content %></p>
+    </div>
+  </div>
+</div>
+<!-- Comments -->
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Comments
+    </div>
+    <ul class="list-group list-group-flush">
+      <% comments.forEach(comment => { %>
+        <li class="list-group-item">
+          <p>
+            <b>"<%=comment.User.username%>" commented: </b> <%= comment.content %>
+          </p>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+<%- include('../partials/footer') %>

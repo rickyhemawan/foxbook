@@ -30,9 +30,9 @@ class UserController {
     const { userId, username } = req.session
     const UserId = userId;
     Promise.all([
-      User.findByPk(userId),
-      Story.findAll({ where: { UserId } }),
-      Comment.findAll({ where: { UserId }, include: Story })
+      User.findByPk(userId, { attributes: ['username', 'id', 'email'] }),
+      Story.findAll({ where: { UserId }, order: [['createdAt', 'DESC']]}),
+      Comment.findAll({ where: { UserId }, include: Story, order: [['createdAt', 'DESC']] })
     ])
     .then(([user, stories, comments]) => {
       res.render('users', { user, stories, comments, username })
