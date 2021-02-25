@@ -38,9 +38,10 @@ class UserController {
     res.redirect('/login')
   }
 
-  // CRUD
+  // User Manipulation
   static read(req, res) {
     const { userId, username } = req.session
+    const { errors } = req.query
     const UserId = userId;
     Promise.all([
       User.findByPk(userId, { attributes: ['username', 'id', 'email'] }),
@@ -48,10 +49,28 @@ class UserController {
       Comment.findAll({ where: { UserId }, include: Story, order: [['createdAt', 'DESC']] })
     ])
     .then(([user, stories, comments]) => {
-      res.render('users', { user, stories, comments, username })
+      res.render('users', { user, stories, comments, username, errors })
     })
     .catch(err => res.send(err))
     
+  }
+
+  static update(req, res){
+    const id = req.session.userId;
+    User.update(req.body, { where: { id } })
+      .then(_ => res.redirect('/logout'))
+      .catch(err => {
+        if(!err.errors) return res.send(errors)
+        const errors = parseErrorMessage(err)
+        res.redirect(`/user?errors=${errors}`)
+      })
+  }
+
+  static delete(req, res){
+    const id = req.session.userId;
+    User.destroy({ where: { id } })
+      .then(_ => res.redirect('/logout'))
+      .catch(err => res.send(err))
   }
   
 }

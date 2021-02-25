@@ -6,21 +6,32 @@
 <!-- Form -->
 <div class="container my-3">
   <div class="card">
-    <h2 class="card-header">Edit Profile</h2>
+    <div class="card-header">
+      <div class="row">
+        <div class="col"><h2>Edit Profile</h2></div>
+        <div class="col-auto">
+          <button onclick="deleteAlert('/user/delete')" class="btn btn-outline-danger me-2">Delete Account</button>
+        </div>
+      </div>
+    </div>
     <div class="card-body">
-      <form action="#" method="post">
+      <%- include('../components/error-handler', { errors }) %>
+      <form action="/user/update" method="post">
         <div class="row">
           <div class="mb-3 col">
             <label class="form-label">Username</label>
-            <input type="text" class="form-control" value="<%= user.username %>">
+            <input type="text" class="form-control" value="<%= user.username %>" name="username">
           </div>
           <div class="mb-3 col">
             <label class="form-label">Email</label>
-            <input type="text" class="form-control" value="<%= user.email %>">
+            <input type="text" class="form-control" value="<%= user.email %>" name="email">
           </div>
         </div>
     
         <div class="row justify-content-end mb-3">
+          <div class="col">
+            <p>You will be logged out, if you change either your Username or Email</p>
+          </div>
           <div class="col-auto">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
@@ -28,13 +39,14 @@
             <a class="btn btn-outline-danger" href="/user">Cancel</a>
           </div>
         </div>
+        
       </form>
     </div>
   </div>
 </div>
 <div class="container my-4">
   <div class="col-12 d-grid">
-    <a class="btn btn-primary" href="/stories/create">Create Post</a>
+    <a class="btn btn-lg btn-primary" href="/stories/create">Create Story</a>
   </div>
 </div>
 
@@ -86,4 +98,12 @@
     <% }) %>
   </div>
 </div>
+
+<script>
+  function deleteAlert(params) {
+    if(confirm("Once the user is deleted, it cannot be retrieved! Are you sure?")) {
+      window.location.href = params
+    }
+  }
+</script>
 <%- include('../partials/footer') %>
