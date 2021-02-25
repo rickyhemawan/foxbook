@@ -2,6 +2,8 @@ const { Story, User, Comment } = require('../models')
 
 const { Sequelize } = require('sequelize')
 
+const { parseErrorMessage } = require('../helpers/error-handler')
+
 class StoryController {
 
   static readAll(req, res) {
@@ -11,6 +13,7 @@ class StoryController {
         'id','title', 'content',
         [Sequelize.fn("COUNT", Sequelize.col("Comments.id")), "commentsCounter"]
       ],
+      order: [['createdAt', 'DESC']],
       include: [
         { model: User, attributes: ['username']},
         { model: Comment, attributes: []},
@@ -21,9 +24,14 @@ class StoryController {
     .catch(err => res.send(err))
   }
 
+  static redirectReadAll(req, res){
+    res.redirect('/')
+  }
+
   static readOne(req, res) {
     const { id } = req.params
     const { userId, username } = req.session
+    const { errors } = req.query
     Promise.all([
       Story.findByPk(+id, { include: { model: User, attributes: ['username'] },  }),
       Comment.findAll({
@@ -35,12 +43,37 @@ class StoryController {
       })
     ])
     .then(([story, comments]) => res.render('stories/show-one',{
-      story, comments, username, userId 
+      story, comments, username, userId, errors
     }))
-    // .then(([story, comments]) => res.send({
-    //   story, comments, username, userId 
-    // }))
     .catch(err => res.send(err))
+  }
+  static showCreate(req,res){
+    const { errors } = req.query
+    const { username } = req.session
+    res.render('stories/add-form', { username, errors })
+  }
+  static create(req,res){
+    const id = +req.session.userId
+    req.body.UserId = id;
+    Story.create(req.body)
+      .then(_ => res.redirect('/'))
+      .catch(err => {
+        if(!err.errors) return res.send(err)
+        const errors = parseErrorMessage(err)
+        res.redirect(`/stories/create?errors=${errors}`)
+      })
+  }
+  static addComment(req,res){
+    const StoryId = +req.params.id;
+    const UserId = +req.session.userId
+    const { content } = req.body;
+    Comment.create({ StoryId, UserId, content })
+      .then(_ => res.redirect(`/stories/${StoryId}`))
+      .catch(err => {
+        if(!err.errors) return res.send(err)
+        const errors = parseErrorMessage(err)
+        res.redirect(`/stories/${StoryId}?errors=${errors}`)
+      })
   }
 
 }

@@ -1,0 +1,9 @@
+<% if(errors){ %>
+  <% errors = errors.split(',') %>
+  <% if(!Array.isArray(errors)) errors = [errors] %>
+  <% errors.forEach(error => { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+  <% }) %>
+<% } %>

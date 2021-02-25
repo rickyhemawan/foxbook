@@ -34,7 +34,7 @@
 </div>
 <div class="container my-4">
   <div class="col-12 d-grid">
-    <button class="btn btn-primary" type="button">Create Story</button>
+    <a class="btn btn-primary" href="/stories/create">Create Post</a>
   </div>
 </div>
 
@@ -51,7 +51,7 @@
             <h5 class="card-title"><%= story.title %></h5>
             <p class="card-text"><%= story.content %></p>
             <div class="d-md-flex justify-content-md-end">
-              <a class="btn btn-primary">Show Comments</a>
+              <a class="btn btn-primary" href="/stories/<%= story.id %>">Show Comments</a>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
           <div class="card-footer p-4 text-justify">
             <b><%=user.username%> commented:</b> <%= comment.content %>
             <div class="d-md-flex justify-content-md-end my-2">
-              <a class="btn btn-dark">Show Story</a>
+              <a class="btn btn-dark" href="/stories/<%= comment.Story.id %>">Show Story</a>
             </div>
           </div>
         </div>

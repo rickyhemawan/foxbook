@@ -15,8 +15,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Story.init({
-    title: DataTypes.STRING,
-    content: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "Title cannot be empty" },
+      }
+    },
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "Content cannot be empty" },
+      }
+    },
     UserId: DataTypes.INTEGER
   }, {
     sequelize,

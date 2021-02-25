@@ -3,6 +3,7 @@ function generateErrorMessage(message) {
 }
 
 function parseErrorMessage(err) {
+  if(!err.errors) return [];
   return err.errors.map(e => e.message)
 }
 

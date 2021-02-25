@@ -15,7 +15,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Comment.init({
-    content: DataTypes.STRING,
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "Comment cannot be empty" },
+      }
+    },
     StoryId: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER
   }, {
