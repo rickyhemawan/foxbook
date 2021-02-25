@@ -1,6 +1,6 @@
 'use strict';
 
-const data = require('../data/comments.json')
+let data = require('../data/comments.json')
 const { User, Story } = require('../models');
 
 module.exports = {
