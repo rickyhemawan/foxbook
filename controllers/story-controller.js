@@ -77,10 +77,14 @@ class StoryController {
   }
 
   static deleteComment(req, res){
-    
+    Comment.destroy({where: { id: +req.params.id }})
+      .then(_ => res.redirect('/user'))
+      .catch(err => res.send(err))
   }
   static delete(req, res){
-    
+    Story.destroy({where: { id: +req.params.id }})
+      .then(_ => res.redirect('/user'))
+      .catch(err => res.send(err))
   }
 
 }
