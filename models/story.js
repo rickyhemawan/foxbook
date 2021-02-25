@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       Story.belongsTo(models.User)
     }
 
+    toPlainText(){
+      return `Title: ${this.title}\nContent: ${this.content}`
+    }
+
     createdFromNow(){
       dayjs.extend(relativeTime)
       return dayjs(this.createdAt).fromNow();

@@ -23,7 +23,6 @@
             <h5 class="card-title"><%= story.title %></h5>
             <p class="card-text"><%= story.content %></p>
             <div class="d-md-flex justify-content-md-end">
-              <% console.log(story) %>
               <a class="btn btn-primary" href="/stories/<%= story.id %>">
                 Show Comments (<%= story.dataValues.commentsCounter %>)
               </a>

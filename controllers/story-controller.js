@@ -3,7 +3,7 @@ const { Story, User, Comment } = require('../models')
 const { Sequelize } = require('sequelize')
 
 const { parseErrorMessage } = require('../helpers/error-handler')
-
+const { sendMail } = require('../helpers/mail-sender')
 class StoryController {
 
   static readAll(req, res) {
@@ -86,6 +86,25 @@ class StoryController {
     Story.destroy({where: { id: +req.params.id }})
       .then(_ => res.redirect('/user'))
       .catch(err => res.send(err))
+  }
+
+  static shareStory(req, res) {
+    Promise.all([
+      Story.findByPk(+req.params.id),
+      User.findByPk(+req.session.userId)
+    ])
+    .then(([story, user]) => {
+      sendMail({ 
+        to: user.email,
+        subject: "FoxBook Mail Sender :D",
+        text: story.toPlainText(),
+       })
+       res.redirect('/')
+    })
+    .catch(err => {
+      console.log(err);
+      res.redirect('/')
+    })
   }
 
 }

@@ -3,7 +3,13 @@
 <div class="container">
   <div class="card my-2">
     <div class="card-header px-4 ">
-      <h4>Story</h4>
+      <div class="row">
+        <div class="col"><h4>Story</h4></div>
+        <div class="col-auto">
+          <a class="btn btn-success me-2" href="/stories/<%= story.id %>/share-story">Send Story to my email</a>
+        </div>
+      </div>
+      
     </div>
     <div class="card-body p-4 text-justify">
       <div class="row">
