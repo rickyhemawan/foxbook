@@ -1,7 +1,7 @@
 const express = require('express');
 const router = require('./routes')
 const session = require('express-session')
-const PORT = 3000;
+const PORT = process.env.PORT;
 const app = express();
 app.use(session({
   secret: 'KEKWait',
