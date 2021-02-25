@@ -1,6 +1,6 @@
 # FoxBook
 
-Deployed Demo: https://dashboard.heroku.com/apps/frozen-everglades-64057
+Deployed Demo: https://frozen-everglades-64057.herokuapp.com/
 
 If you want to run this locally
 - Change the `PORT` of `app.js` into any port (`3000` recommended)
@@ -42,7 +42,7 @@ node app.js <or> npm start <or> nodemon app.js
 
 
 ## Additional Features
-- Menggunakan `DayJS` untuk melihat sudah berapa lama Story atau Comment di post
-- Menggunakan `nodemailer`
+- Using `DayJS` for showing how long the Story or the Comment has been created.
+- Using `nodemailer` to send the Story to your registered email, (if you wanted ofc)
 
 PS, Because I made this simple readme at 3am, maybe theres some features that I dont mention. sorry for that.
