@@ -1,0 +1,21 @@
+html {
+  height: 100%;
+}
+
+body {
+  background: #000000;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(45deg, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(45deg, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+
+.btn-primary {
+  background-color: #00838f;
+  border-color: #00838f;
+}
+
+h1 {
+  font-size: 64px;
+}
+
+

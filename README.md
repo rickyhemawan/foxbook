@@ -9,7 +9,7 @@
 
 - User bisa Sign in, Log in Logout
 - User bisa buat Story ( semacam status facebook)
-- Banyak User bisa comment di status
+- Banyak User bisa comment di Story
 - User bisa edit profilenya
 
 - Story bisa di Comment oleh banyak User
