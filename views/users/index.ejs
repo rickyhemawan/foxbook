@@ -60,6 +60,9 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body p-4 text-justify">
+            <h6 class="card-subtitle my-2 text-muted">
+              Posted <b><%= story.createdFromNow() %></b>
+            </h6>
             <h5 class="card-title"><%= story.title %></h5>
             <p class="card-text"><%= story.content %></p>
             <div class="d-md-flex justify-content-md-end">
@@ -83,11 +86,14 @@
       <div class="col-12">
         <div class="card my-2">
           <div class="card-body p-4 text-justify">
+            <h6 class="card-subtitle my-2 text-muted">
+              Posted <b><%= comment.Story.createdFromNow() %></b>
+            </h6>
             <h5 class="card-title"><%= comment.Story.title %></h5>
             <p class="card-text"><%= comment.Story.content %></p>
           </div>
           <div class="card-footer p-4 text-justify">
-            <b><%=user.username%> commented:</b> <%= comment.content %>
+            <b><%=user.username%> commented <span class="text-muted">(<%= comment.createdFromNow() %>)</span>  :</b> <%= comment.content %>
             <div class="d-md-flex justify-content-md-end my-2">
               <a class="btn btn-danger me-2" href="/stories/<%= comment.id %>/delete-comment">Delete Comment</a>
               <a class="btn btn-dark" href="/stories/<%= comment.Story.id %>">Show Story</a>

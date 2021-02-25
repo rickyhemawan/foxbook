@@ -1,4 +1,6 @@
 'use strict';
+const relativeTime = require('dayjs/plugin/relativeTime');
+const dayjs = require('dayjs')
 const {
   Model
 } = require('sequelize');
@@ -12,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Story.hasMany(models.Comment);
       Story.belongsTo(models.User)
+    }
+
+    createdFromNow(){
+      dayjs.extend(relativeTime)
+      return dayjs(this.createdAt).fromNow();
     }
   };
   Story.init({
@@ -29,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: { msg: "Content cannot be empty" },
       }
     },
+    createdAt: DataTypes.DATE,
     UserId: DataTypes.INTEGER
   }, {
     sequelize,

@@ -10,7 +10,7 @@ class StoryController {
     const { username } = req.session
     Story.findAll({ 
       attributes: [
-        'id','title', 'content',
+        'id','title', 'content', 'createdAt',
         [Sequelize.fn("COUNT", Sequelize.col("Comments.id")), "commentsCounter"]
       ],
       order: [['createdAt', 'DESC']],
@@ -36,6 +36,7 @@ class StoryController {
       Story.findByPk(+id, { include: { model: User, attributes: ['username'] },  }),
       Comment.findAll({
         where: { StoryId: +id },
+        order: [['createdAt', 'ASC']],
         include: {
           model: User,
           attributes: ['username']

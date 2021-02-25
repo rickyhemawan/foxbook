@@ -6,9 +6,18 @@
       <h4>Story</h4>
     </div>
     <div class="card-body p-4 text-justify">
-      <h6 class="card-subtitle my-2 text-muted">
-        Created by: <b><%= story.User.username %></b>
-      </h6>
+      <div class="row">
+        <div class="col">
+          <h6 class="card-subtitle my-2 text-muted">
+            Created by: <b><%= story.User.username %></b>
+          </h6>
+        </div>
+        <div class="col-auto">
+          <h6 class="card-subtitle my-2 text-muted">
+            Posted <b><%= story.createdFromNow() %></b>
+          </h6>
+        </div>
+      </div>
       <h5 class="card-title"><%= story.title %></h5>
       <p class="card-text"><%= story.content %></p>
     </div>
@@ -24,7 +33,7 @@
       <% comments.forEach(comment => { %>
         <li class="list-group-item">
           <p>
-            <b>"<%=comment.User.username%>" commented: </b> <%= comment.content %>
+            <b>"<%=comment.User.username%>" commented <span class="text-muted">(<%= comment.createdFromNow() %>)</span> : </b><%= comment.content %>
           </p>
         </li>
       <% }) %>

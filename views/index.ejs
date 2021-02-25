@@ -8,9 +8,18 @@
       <div class="col-lg-9">
         <div class="card">
           <div class="card-body p-4 text-justify">
-            <h6 class="card-subtitle my-2 text-muted">
-              Created by: <b><%= story.User.username %></b>
-            </h6>
+            <div class="row">
+              <div class="col">
+                <h6 class="card-subtitle my-2 text-muted">
+                  Created by: <b><%= story.User.username %></b>
+                </h6>
+              </div>
+              <div class="col-auto">
+                <h6 class="card-subtitle my-2 text-muted">
+                  Posted <b><%= story.createdFromNow() %></b>
+                </h6>
+              </div>
+            </div>
             <h5 class="card-title"><%= story.title %></h5>
             <p class="card-text"><%= story.content %></p>
             <div class="d-md-flex justify-content-md-end">
