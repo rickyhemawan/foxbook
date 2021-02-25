@@ -76,6 +76,13 @@ class StoryController {
       })
   }
 
+  static deleteComment(req, res){
+    
+  }
+  static delete(req, res){
+    
+  }
+
 }
 
 module.exports = { StoryController };

@@ -5,6 +5,7 @@
       <div class="card p-4">
         <div class="card-body p-4">
           <h1 class="card-title">FoxBook</h1>
+          <%- include('components/error-handler', { errors }) %>
           <form action="/register" method="POST">
             <div class="mb-3">
               <label class="form-label">Username</label>

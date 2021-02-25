@@ -9,6 +9,10 @@ router.get('/create', StoryController.showCreate)
 router.post('/create', StoryController.create)
 
 router.post('/:id/add-comment', StoryController.addComment)
+
+router.get('/:id/delete-comment', StoryController.deleteComment)
+router.get('/:id/delete-story', StoryController.delete)
+
 router.get('/:id', StoryController.readOne)
 
 module.exports = router

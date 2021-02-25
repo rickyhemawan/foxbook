@@ -4,20 +4,33 @@ class UserController {
 
   // Authentications
   static showLogin(req, res) {
-    res.render('login')
+    const { errors } = req.query
+    res.render('login', { errors })
   }
 
   static showRegister(req, res) {
-    res.render('register')
+    const { errors } = req.query
+    res.render('register', { errors })
   }
   static login(req, res) {
     User.authenticate(req)
       .then(_ => res.redirect('/'))
-      .catch(err => res.redirect(`/login?errors=${parseErrorMessage(err)}`))
+      .catch(err => {
+        if(!err.errors) return res.send(err)
+        const errors = parseErrorMessage(err)
+        res.redirect(`/login?errors=${errors}`)
+      })
   }
 
   static register(req, res) {
-    
+    User.create(req.body)
+      .then(_ => User.authenticate(req))
+      .then(_ => res.redirect('/'))
+      .catch(err => {
+        if(!err.errors) return res.send(errors)
+        const errors = parseErrorMessage(err)
+        res.redirect(`/register?errors=${errors}`)
+      })
   }
   
   static logout(req, res) {
